@@ -15,4 +15,5 @@ Route::get('/', function()
 {
 	return View::make('login');
 });
- Route::get('/personas/{id}','PersonaController@index');
+Route::post('/login', array('as' => 'login', 'uses' => 'LoginController@login'));
+Route::get('/personas/{id}','PersonaController@index');
