@@ -13,6 +13,6 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('login');
 });
- Route::get('/personas','PersonaController@index');
+ Route::get('/personas/{id}','PersonaController@index');

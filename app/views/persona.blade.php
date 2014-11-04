@@ -1,3 +1,1 @@
-@foreach($Personas as $persona)
-<li>{{$persona->ape_nom}}</li>
-@endforeach
+{{$Personas->ape_nom}}

@@ -13,8 +13,9 @@
  */
 class PersonaController extends BaseController{
    
-    public function index(){
-        $Personas =Persona::all();
+    public function index($id){
+        $Personas =Persona::find($id);
+        //echo $Personas;
         return View::make('persona',compact('Personas'));
     }
 }
