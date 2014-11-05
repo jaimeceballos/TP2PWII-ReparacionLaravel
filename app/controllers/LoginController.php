@@ -14,8 +14,23 @@
 class LoginController  extends BaseController{
     //put your code here
     function login(){
-        $datos = Input::all();
-        
+        $datos = array(
+        	'user' => Input::get('usuario'),
+        	'pass' => Input::get('password')
+        	);
+        User::create(array(
+        		'user'=>$datos['user'],
+        		'pass'=>Hash::make($datos['pass']),
+        		'rol'=>'empleado'
+        	));
+        if(Auth::attempt($datos,Input::get('remember-me',0)))
+        {
+        	return Redirect::to('/home');
+        }
+
+        return Redirect::to('/')
+        		->with('mensaje_error','Verifica tus datos')
+        		->withInput();
         
     }
 }
