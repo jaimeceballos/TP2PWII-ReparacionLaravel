@@ -30,12 +30,12 @@
             <center>
               <div>
                 
-                {{Form::text('usuario','',$attributes=array('class'=>'form-control','placeholder'=>'Usuario'))}}
-                {{Form::password('password',$attributes=array('class'=>'form-control','placeholder'=>'Password'))}}    
+                {{Form::text('usuario','',['class'=>'form-control','placeholder'=>'Usuario'])}}
+                {{Form::password('password',['class'=>'form-control','placeholder'=>'Password'])}}    
                 </div>
               <br>
               <button class="btn btn-primary btn-block" type="submit">Ingresar</button>
-            </center>
+            </center>   
           {{Form::close()}}
         </div>
       </div>
