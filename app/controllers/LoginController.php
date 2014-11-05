@@ -15,21 +15,25 @@ class LoginController  extends BaseController{
     //put your code here
     function login(){
         $datos = array(
-        	'user' => Input::get('usuario'),
-        	'pass' => Input::get('password')
+        	'username' => Input::get('usuario'),
+        	'password' => Input::get('password')
         	);
-        User::create(array(
+        /*User::create(array(
         		'user'=>$datos['user'],
         		'pass'=>Hash::make($datos['pass']),
         		'rol'=>'empleado'
-        	));
-        if(Auth::attempt($datos,Input::get('remember-me',0)))
+        	));*/
+        if(Auth::attempt($datos))
         {
-        	return Redirect::to('/home');
+        	return Redirect::to('/personas/1');
         }
-
+        /*$user = User::find(3);
+        if(Auth::login($user))
+        {
+            return Redirect::to('/home');
+        }*/
         return Redirect::to('/')
-        		->with('mensaje_error','Verifica tus datos')
+        		->with('mensaje_error','Verifica tus datos'.serialize($user))
         		->withInput();
         
     }

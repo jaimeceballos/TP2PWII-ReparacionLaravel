@@ -17,7 +17,9 @@
 </head>
 <body>
   <div class="container">
-  	
+  	@if(Session::has('mensaje_error'))
+            {{ Session::get('mensaje_error') }}
+        @endif
 	<center><label>Bienvenido</label></center>
 	<center><label>Ingrese sus datos para comenzar</label></center>
 
