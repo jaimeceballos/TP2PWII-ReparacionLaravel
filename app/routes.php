@@ -11,9 +11,18 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/', ['as'=>'home','uses'=>'AuthController@index']);
+Route::post('/login', array('as' => 'login', 'uses' => 'AuthController@login'));
+
+Route::group(array('before' => 'auth'), function()
 {
-	return View::make('login');
+	Route::get('/personas/{id}','PersonaController@index');
+    // Esta será nuestra ruta de bienvenida.
+    /*Route::get('/', function()
+    {
+        return View::make('hello');
+    });*/
+    // Esta ruta nos servirá para cerrar sesión.
+    Route::get('logout', 'AuthController@logOut');
+    Route::resource('cliente', 'ClienteController');
 });
-Route::post('/login', array('as' => 'login', 'uses' => 'LoginController@login'));
-Route::get('/personas/{id}','PersonaController@index');

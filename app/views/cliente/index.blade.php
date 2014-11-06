@@ -1,0 +1,1 @@
+{{Form::text('ape_nom','',['class'=>'form-control','placeholder'=>'nombre y apellido'])}}

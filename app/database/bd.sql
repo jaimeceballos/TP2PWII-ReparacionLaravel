@@ -410,11 +410,14 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user` varchar(10) NOT NULL,
-  `pass` text NOT NULL,
+  `username` varchar(10) NOT NULL,
+  `password` text NOT NULL,
   `rol` varchar(45) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -423,35 +426,9 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'jaime','e10adc3949ba59abbe56e057f20f883e','empleado'),(2,'jperez','e10adc3949ba59abbe56e057f20f883e','cliente');
+INSERT INTO `usuario` VALUES (3,'jaime','$2y$10$DwGvRCNru4VSSk0uwMWyLu9QTdbwWGcdkS5D1suVF24uYxxzO0EQm','empleado',NULL,NULL,'PGSDIP3hqrE6kBpFkUSSlx0PQF1WSm3IPUSxvXQNC4zH6amSrBiZ9l1SODZv');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `usuario_BINS` BEFORE INSERT ON `usuario` FOR EACH ROW
-begin
-	declare pass_md5 text;
-	set pass_md5 := md5(NEW.pass);
-	set NEW.pass := pass_md5;
-	if length(NEW.user)<3 and length(NEW.user)>10 then
-		signal sqlstate '45000' set message_text = "Usuario debe tener entre 3 y 10 caracteres";
-	end if;
-	if NEW.rol != 'cliente' or NEW.rol !='empleado' then
-		signal sqlstate '45000' set message_text = "No ingreso un rol valido";
-	end if;
-end */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Dumping events for database 'proyectoBD'
@@ -613,4 +590,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-05  0:22:38
+-- Dump completed on 2014-11-06  1:51:45
