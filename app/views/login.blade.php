@@ -28,7 +28,7 @@
         <div class="login-form">
          <center><img id="profile-img" class="profile-img" src="{{asset('static/img/avatar_2x.png')}}" alt="" style=""></center>
          {{Form::open(['route'=>'login'])}} 
-         <!--form action="controller/controller.php" method="POST"-->
+         
             <center>
               <div>
                 

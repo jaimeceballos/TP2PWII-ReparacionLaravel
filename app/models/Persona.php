@@ -14,5 +14,17 @@
 class Persona extends Eloquent{
     protected $table = 'persona';
     public $timestamps = false;
-    //put your code here
+    
+
+
+    public static $rules = array(
+    		'ape_nom' => 'required|min:7|max:100',
+    		'juridica'=>'required|in:0,1',
+    		'dni'=>'numeric',
+    		'cuit'=>'numeric',
+    		'domicilio'=>'min:10',
+    		'telefono'=>'min:10',
+    		'email'=>'email',
+    	);
+
 }

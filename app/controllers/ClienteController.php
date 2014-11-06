@@ -9,8 +9,8 @@ class ClienteController extends \BaseController {
 	 */
 	public function index()
 	{
-		$cliente = new Cliente;
-		return View::make('cliente.index',compact('cliente')); 
+		$clientes = Cliente::with('persona')->get();
+		return View::make('cliente.index',compact('clientes')); 
 	}
 
 
@@ -21,7 +21,7 @@ class ClienteController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('cliente.create');
 	}
 
 
@@ -32,7 +32,22 @@ class ClienteController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+		$validation = Validator::make($input,Persona::$rules);
+		if($validation->passes())
+		{
+			$persona = Persona::firstOrCreate($input);
+			Cliente::create(array(
+        		'persona_id'=>$persona->id,
+        		'activo'=>1,
+        	));
+
+			return Redirect::route('cliente.index');
+		}
+		return Redirect::route('cliente.create')
+							->withInput()
+							->withErrors($validation)
+							->with('message','Error al Guardar.');
 	}
 
 
