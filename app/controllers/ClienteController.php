@@ -36,7 +36,18 @@ class ClienteController extends \BaseController {
 		$validation = Validator::make($input,Persona::$rules);
 		if($validation->passes())
 		{
-			$persona = Persona::firstOrCreate($input);
+			$data = array(
+				'ape_nom'=>$input['ape_nom'],
+				'juridica'=>$input['juridica'],
+				'dni'=>$input['dni'],
+				'cuit'=>$input['cuit'],
+				'domicilio'=>$input['domicilio'],
+				'telefono'=>$input['telefono'],
+				'email'=>$input['email']
+			);
+			
+			$persona = Persona::firstOrCreate($data);
+
 			Cliente::create(array(
         		'persona_id'=>$persona->id,
         		'activo'=>1,
