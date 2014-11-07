@@ -33,7 +33,7 @@ class AuthController  extends BaseController{
         	));*/
         if(Auth::attempt($datos))
         {
-        	return Redirect::to('cliente');
+        	return Redirect::to('/inicio');
         }
        
         return Redirect::to('/')

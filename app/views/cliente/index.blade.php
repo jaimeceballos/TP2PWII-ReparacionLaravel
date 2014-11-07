@@ -10,9 +10,8 @@
 <table class="table condensed bordered">
 <thead>
 	<tr>
-		<th>id</th>
-		<th>cliente</th>
-		<th>estado</th>
+		<th>N° Cliente</th>
+		<th>Nombre / Razon social</th>
 		<th></th>
 	</tr>
 </thead>
@@ -21,8 +20,12 @@
 		<tr>
 			<td>{{$item->id}}</td>
 			<td>{{$item->persona->ape_nom}}</td>
-			<td>{{$item->activo}}</td>
-			<td><a href="{{ URL::route('cliente.edit', $item->id) }}">editar</a> - <a href="">eliminar</a></td>
+			<td><a href="{{ URL::route('cliente.edit', $item->id) }}"><i class="glyphicon glyphicon-edit"></i></a>  
+			{{ Form::open(array('style' => 'display: inline-block;', 'method' => 'DELETE', 'route' => array('cliente.destroy', $item->id))) }}
+                    <button class="btn btn-link"><i class="glyphicon glyphicon-trash"></i></button>
+                {{ Form::close() }}
+
+			<!--<a href="{{ URL::route('cliente.destroy',$item->id) }}"><i class="glyphicon glyphicon-trash"></i></a--></td>
 		</tr>
 	@endforeach
 </tbody>

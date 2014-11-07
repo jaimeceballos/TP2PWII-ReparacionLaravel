@@ -41,6 +41,7 @@
 		<label>Email</label>
 		{{Form::email('email','',['placeholder'=>'usuario@ejemplo.com','class'=>'form-control'])}}<br>
 	</div>
+	<a href="{{ URL::route('cliente.index') }}" class="btn btn-link">Cancelar</a>
 	<button type="submit" class="btn btn-info btn-sm pull-right"><strong>Guardar</strong></button>
 {{Form::close()}}
 @stop
