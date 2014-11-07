@@ -9,6 +9,10 @@ class ClienteController extends \BaseController {
 	 */
 	public function index()
 	{
+		if(!Auth::check())
+		{
+			dd(Auth::check());
+		}
 		$clientes = Cliente::with('persona')->get();
 		return View::make('cliente.index',compact('clientes')); 
 	}
@@ -82,7 +86,9 @@ class ClienteController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$cliente = Cliente::find($id);
+		$persona = Persona::find($cliente->persona_id);
+		dd($persona);
 	}
 
 

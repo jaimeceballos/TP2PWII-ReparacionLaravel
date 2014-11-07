@@ -1,10 +1,13 @@
+@extends('layouts.base')
+@section('main')
 
 <h1> ABM de clientes</h1>
+<hr>
 
+<a href="{{ URL::route('cliente.create') }}" class="btn btn-success ">nuevo</a>
+<hr>
 
-<a href="{{ URL::route('cliente.create') }}">nuevo</a>
-
-<table>
+<table class="table condensed bordered">
 <thead>
 	<tr>
 		<th>id</th>
@@ -24,3 +27,4 @@
 	@endforeach
 </tbody>
 </table>
+@stop

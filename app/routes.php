@@ -18,11 +18,11 @@ Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/personas/{id}','PersonaController@index');
     // Esta será nuestra ruta de bienvenida.
-    /*Route::get('/', function()
+    Route::get('/inicio', function()
     {
-        return View::make('hello');
-    });*/
+        return View::make('inicio');
+    });
     // Esta ruta nos servirá para cerrar sesión.
-    Route::get('logout', 'AuthController@logOut');
+    Route::get('logout', ['as'=>'logout','uses'=>'AuthController@logOut']);
     Route::resource('cliente', 'ClienteController');
 });

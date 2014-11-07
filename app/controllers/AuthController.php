@@ -15,7 +15,7 @@ class AuthController  extends BaseController{
     function index(){
         if(Auth::check())
         {
-            return Redirect::to('cliente');
+            return Redirect::to('/inicio');
         }
         return View::make('login');
     }
