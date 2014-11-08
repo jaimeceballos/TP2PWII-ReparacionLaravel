@@ -11,7 +11,7 @@ class ClienteController extends BaseController {
 	{
 		if(!Auth::check())
 		{
-			dd(Auth::check());
+		
 		}
 		$clientes = Cliente::with('persona')->where('activo','=','1')->get();
 		return View::make('cliente.index',compact('clientes')); 
@@ -37,7 +37,7 @@ class ClienteController extends BaseController {
 	public function store()
 	{
 		$input = Input::all();
-		$validation = Validator::make($input,Persona::$rules);
+		$validation = Persona::validar($input);
 		if($validation->passes())
 		{
 			$data = array(

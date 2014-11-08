@@ -14,7 +14,7 @@
 class Persona extends Eloquent{
     protected $table = 'persona';
     public $timestamps = false;
-    protected $fillable = ['ape_nom', 'juridica','dni','cuit','domicilio','telefono','email'];
+    protected $guarded = ['ape_nom', 'juridica','dni','cuit','domicilio','telefono','email'];
 
 
     public static $rules = array(
@@ -26,5 +26,17 @@ class Persona extends Eloquent{
     		'telefono'=>'min:10',
     		'email'=>'email',
     	);
-
+    
+    public function validar($input)
+    {
+        $v = Validator::make($input,Persona::$rules);
+        
+        $v->sometimes(['dni'],'required',function($input){
+            return $input->juridica == 0;
+        });
+        $v->sometimes(['cuit'],'required',function($input){
+            return $input->juridica == 1;
+        });
+        return $v;
+    }
 }

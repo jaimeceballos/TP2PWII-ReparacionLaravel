@@ -41,7 +41,7 @@
 										<a href="{{ URL::route('cliente.index') }}">Alta/edicion de Clientes</a>
 									</li>
 									<li>
-										<a href="">Alta de Equipo</a>
+										<a href="{{ URL::route('equipos.index') }}">Alta de Equipo</a>
 									</li>
 									<li>
 	                                    <a href="">Nueva orden de trabajo</a>
