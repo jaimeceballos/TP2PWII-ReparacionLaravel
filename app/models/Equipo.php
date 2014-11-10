@@ -7,8 +7,8 @@ class Equipo extends Eloquent {
         
         
 	public static $rules = array(
-		'tipo_equipo_id' => 'required|exists:tipo_equipo',
-		'cliente_id' => 'required|exists:cliente',
+		'tipo_equipo_id' => 'required|exists:tipo_equipo,id',
+		'cliente_id' => 'required|exists:cliente,id',
 		'descripcion_equipo' => 'required|min:10',
 		'estado_general' => 'required|min:4'
 	);

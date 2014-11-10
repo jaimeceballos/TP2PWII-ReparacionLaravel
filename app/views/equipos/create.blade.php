@@ -21,27 +21,26 @@
 
         <div class="form-group">
             <label>Tipo equipo</label>
-              {{ Form::text('tipo_equipo_id', Input::old('tipo_equipo_id'), array('class'=>'form-control', 'placeholder'=>'Tipo_equipo_id')) }}
-            
+              
+              {{ Form::select('tipo_equipo_id',$tipoEquipo,null,['class'=>'form-control']) }}
         </div>
 
         <div class="form-group">
             <label>Propietario</label>
-              {{ Form::text('cliente_id', Input::old('cliente_id'), array('class'=>'form-control', 'placeholder'=>'Cliente_id')) }}
-            
+                {{ Form::select('cliente_id',$clientes,null,['class'=>'form-control']) }}  
         </div>
 
         <div class="form-group">
             <label>Descripcion</label>
             
-              {{ Form::textarea('descripcion_equipo', Input::old('descripcion_equipo'), array('class'=>'form-control', 'placeholder'=>'Descripcion_equipo')) }}
+              {{ Form::textarea('descripcion_equipo', null, array('class'=>'form-control', 'placeholder'=>'Descripcion_equipo')) }}
             
         </div>
 
         <div class="form-group">
             <label>Estado general</label>
             
-              {{ Form::textarea('estado_general', Input::old('estado_general'), array('class'=>'form-control', 'placeholder'=>'Estado_general')) }}
+              {{ Form::textarea('estado_general', null, array('class'=>'form-control', 'placeholder'=>'Estado_general')) }}
           
         </div>
 

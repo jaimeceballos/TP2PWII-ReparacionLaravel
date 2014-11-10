@@ -39,4 +39,12 @@ class Persona extends Eloquent{
         });
         return $v;
     }
+    public function cliente()
+    {
+        return $this->hasOne('Cliente');
+    }
+    public function empleado()
+    {
+        return $this->hasOne('Empleado');
+    }
 }

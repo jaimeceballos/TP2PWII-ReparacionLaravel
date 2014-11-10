@@ -33,8 +33,9 @@ class EquipoController extends BaseController {
 	 */
 	public function create()
 	{
-                $tipoEquipo = TipoEquipo::all();
-                $clientes = Cliente::with('persona')->get();
+                $tipoEquipo = TipoEquipo::all()->lists('descripcion','id');
+                $clientes = Persona::has('cliente')->lists('ape_nom','id');
+
 		return View::make('equipos.create',compact('tipoEquipo','clientes'));
 	}
 
@@ -46,11 +47,20 @@ class EquipoController extends BaseController {
 	public function store()
 	{
 		$input = Input::all();
-		$validation = Validator::make($input, Equipo::$rules);
+		$cliente = $input['cliente_id'];
+		$cliente = Persona::find($cliente)->cliente->id;
+		$clearInput = array(
+				'tipo_equipo_id'=>$input['tipo_equipo_id'],
+				'cliente_id' => $input['cliente_id'],
+				'descripcion_equipo' => $input['descripcion_equipo'],
+				'estado_general'	=> $input['estado_general']
+			);
+
+		$validation = Validator::make($clearInput, Equipo::$rules);
 
 		if ($validation->passes())
 		{
-			$this->equipo->create($input);
+			$this->equipo->create($clearInput);
 
 			return Redirect::route('equipos.index');
 		}
@@ -58,7 +68,7 @@ class EquipoController extends BaseController {
 		return Redirect::route('equipos.create')
 			->withInput()
 			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->with('message', 'Verifique los datos ingresados.');
 	}
 
 	/**
