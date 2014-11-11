@@ -44,7 +44,7 @@
 										<a href="{{ URL::route('equipos.index') }}">Alta de Equipo</a>
 									</li>
 									<li>
-	                                    <a href="">Nueva orden de trabajo</a>
+	                                    <a href="{{ URL::route('orden.index') }}">Nueva orden de trabajo</a>
 									</li>
 								</ul>
                             @endif   

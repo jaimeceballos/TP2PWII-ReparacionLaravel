@@ -40,7 +40,7 @@
 		</tbody>
 	</table>
 @else
-	There are no equipos
+	No hay equipos cargados
 @endif
 
 @stop

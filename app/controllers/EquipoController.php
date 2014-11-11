@@ -21,7 +21,7 @@ class EquipoController extends BaseController {
 	 */
 	public function index()
 	{
-		$equipos = Equipo::with('tipoEquipo','cliente')->get();
+		$equipos = Equipo::with('tipoEquipo','cliente')->where('baja','=','0')->get();
                 //dd($equipos);
 		return View::make('equipos.index', compact('equipos'));
 	}
@@ -49,13 +49,14 @@ class EquipoController extends BaseController {
 		$input = Input::all();
 		$cliente = $input['cliente_id'];
 		$cliente = Persona::find($cliente)->cliente->id;
+                
 		$clearInput = array(
 				'tipo_equipo_id'=>$input['tipo_equipo_id'],
-				'cliente_id' => $input['cliente_id'],
+				'cliente_id' => $cliente,
 				'descripcion_equipo' => $input['descripcion_equipo'],
 				'estado_general'	=> $input['estado_general']
 			);
-
+              
 		$validation = Validator::make($clearInput, Equipo::$rules);
 
 		if ($validation->passes())
@@ -93,13 +94,14 @@ class EquipoController extends BaseController {
 	public function edit($id)
 	{
 		$equipo = $this->equipo->find($id);
-
+                $tipoEquipo = TipoEquipo::all()->lists('descripcion','id');
+                $clientes = Persona::has('cliente')->lists('ape_nom','id');
 		if (is_null($equipo))
 		{
 			return Redirect::route('equipos.index');
 		}
 
-		return View::make('equipos.edit', compact('equipo'));
+		return View::make('equipos.edit', compact('equipo','tipoEquipo','clientes'));
 	}
 
 	/**
@@ -111,33 +113,44 @@ class EquipoController extends BaseController {
 	public function update($id)
 	{
 		$input = array_except(Input::all(), '_method');
-		$validation = Validator::make($input, Equipo::$rules);
+                $cliente = $input['cliente_id'];
+		$cliente = Persona::find($cliente)->cliente->id;
+                
+		$clearInput = array(
+				'tipo_equipo_id'=>$input['tipo_equipo_id'],
+				'cliente_id' => $cliente,
+				'descripcion_equipo' => $input['descripcion_equipo'],
+				'estado_general'	=> $input['estado_general']
+			);
+		$validation = Validator::make($clearInput, Equipo::$rules);
 
 		if ($validation->passes())
 		{
 			$equipo = $this->equipo->find($id);
-			$equipo->update($input);
+			$equipo->update($clearInput);
 
-			return Redirect::route('equipos.show', $id);
+			return Redirect::route('equipos.index', $id);
 		}
 
 		return Redirect::route('equipos.edit', $id)
 			->withInput()
 			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->with('message', 'Verifique los datos ingresados.');
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  int  $id'
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-		$this->equipo->find($id)->delete();
+		$this->equipo = $this->equipo->find($id);
+                $this->equipo->update(['baja'=>1]);
 
-		return Redirect::route('equipos.index');
+		return Redirect::route('equipos.index')
+                            ->with('message','Equipo Eliminado');
 	}
 
 }

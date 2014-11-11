@@ -150,7 +150,7 @@ class ClienteController extends BaseController {
 		$cliente->update(['activo'=>0]);
 
 		return Redirect::route('cliente.index')
-							->with('message','Cliente borrado.');
+				->with('message','Cliente borrado.');
 	}
 
 

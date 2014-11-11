@@ -1,10 +1,10 @@
-@extends('layouts.scaffold')
+@extends('layouts.base')
 
 @section('main')
-
+<h1>Editar un Equipo</h1>
 <div class="row">
     <div class="col-md-10 col-md-offset-2">
-        <h1>Edit Equipo</h1>
+        
 
         @if ($errors->any())
         	<div class="alert alert-danger">
@@ -18,7 +18,7 @@
 
 {{ Form::model($equipo, array('class' => 'form-horizontal', 'method' => 'PATCH', 'route' => array('equipos.update', $equipo->id))) }}
 
-        <div class="form-group">
+        <!--div class="form-group">
             {{ Form::label('tipo_equipo_id', 'Tipo_equipo_id:', array('class'=>'col-md-2 control-label')) }}
             <div class="col-sm-10">
               {{ Form::text('tipo_equipo_id', Input::old('tipo_equipo_id'), array('class'=>'form-control', 'placeholder'=>'Tipo_equipo_id')) }}
@@ -60,7 +60,8 @@
       {{ Form::submit('Update', array('class' => 'btn btn-lg btn-primary')) }}
       {{ link_to_route('equipos.show', 'Cancel', $equipo->id, array('class' => 'btn btn-lg btn-default')) }}
     </div>
-</div>
+</div-->
+        @include('equipos.form');
 
 {{ Form::close() }}
 
