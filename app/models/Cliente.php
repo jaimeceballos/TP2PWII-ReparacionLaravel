@@ -10,4 +10,14 @@ class Cliente extends Eloquent{
     {
         return $this->belongsTo('Persona');
     }
+
+    public function orden()
+    {
+    	return $this->belongsTo('Orden');
+    }
+
+    public function equipo()
+    {
+    	return $this->hasMany('equipo');
+    }
 }

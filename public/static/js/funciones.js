@@ -13,10 +13,13 @@ $(document).ready(function(){
       }
     });
    $("#cliente_id").change(function(){
+      
       if($("#cliente_id").val() != ""){
           var miselect=$("#equipo");
-         $.get("negocio/equipo_cliente_json.php?cliente="+$("#cliente_id").val(), function(data){
-             miselect.empty();
+          
+         $.get("/orden/getEquipoCliente/"+$("#cliente_id").val(), function(data){
+            
+            miselect.empty();
              if(data.length > 0){
                 for (var i=0; i<data.length; i++) {
                     miselect.append('<option value="' + data[i].id + '">' + data[i].descripcion_equipo + '</option>');

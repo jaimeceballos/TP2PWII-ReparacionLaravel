@@ -26,7 +26,27 @@ class Orden extends Eloquent{
         'trabajo_realizado'=>'min:10',
         'fecha_finalizado'=>'date_format:d/m/Y',
         'fecha_salida'  =>'date_format:d/m/Y',
-        'importe_trabajo'=>''
-        
+        'importe_trabajo'=>'numeric',
+        'numero_factura'=>'numeric',
+        'remito_entrega'=>'numeric',
     );
+
+    public function empleado()
+    {
+        return $this->belongsTo('Empleado');
+    }
+
+    public function cliente()
+    {
+        return $this->belongsTo('Cliente');
+    }
+
+    public function equipos()
+    {
+        return $this->belongsToMany('Equipo','equipo_orden_trabajo');
+    }
+    public function tipoOrden()
+    {
+        return $this->belongsTo('TipoOrden');
+    }
 }

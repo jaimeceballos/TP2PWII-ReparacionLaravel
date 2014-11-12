@@ -1,8 +1,9 @@
 @extends('layouts.base')
-
 @section('main')
-<h1>Editar un Equipo</h1>
+<h1>Nueva Orden de trabajo</h1>
+<hr>
 <div class="row">
+    
     <div class="col-md-10 col-md-offset-2">
         
 
@@ -16,10 +17,10 @@
     </div>
 </div>
 
-{{ Form::model($equipo, array('class' => 'form-horizontal', 'method' => 'PATCH', 'route' => array('equipos.update', $equipo->id))) }}
+{{ Form::open(array('route' => 'orden.store', 'class' => 'form-horizontal')) }}
 
-        @include('equipos.form');
+        @include('orden.form');
+        
 
 {{ Form::close() }}
-
 @stop

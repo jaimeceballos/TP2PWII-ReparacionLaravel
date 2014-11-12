@@ -11,7 +11,8 @@ class OrdenController extends BaseController {
         protected $orden; 
 	public function index()
 	{
-            $ordenes = Orden::all();
+            $ordenes = Orden::with('cliente','tipoOrden')->get();
+            
             return View::make('orden.index',compact('ordenes'));
 	}
 
@@ -22,7 +23,10 @@ class OrdenController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('orden.create');
+		$clientes = Persona::has('cliente')->lists('ape_nom','id');
+		$tipoOrden = TipoOrden::all()->lists('descripcion','id');
+		
+        return View::make('orden.create',compact('clientes','tipoOrden'));
 	}
 
 	/**

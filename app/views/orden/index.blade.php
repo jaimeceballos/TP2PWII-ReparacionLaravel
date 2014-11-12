@@ -10,9 +10,10 @@
 			<tr>
 				<th>Nro</th>
 				<th>Cliente</th>
-				<th>Fecha Ingreso</th>
 				<th>Tipo Orden</th>
-                                <th></th>
+				<th>Fecha Ingreso</th>
+				<th>Fecha Finalizado</th>
+                <th></th>
 			</tr>
 		</thead>
 
@@ -20,9 +21,14 @@
 			@foreach ($ordenes as $item)
 				<tr>
 					<td>{{{ $item->id }}}</td>
-					<td>{{{ $item->cliente_id }}}</td>
-					<td>{{{ $item->fecha_ingreso }}}</td>
-					<td>{{{ $item->tipo_orden_id }}}</td>
+					<td>{{{ $item->cliente->persona->ape_nom }}}</td>
+					<td>{{{ $item->tipoOrden->descripcion }}}</td>
+					<td>{{{ date( "d/m/Y",strtotime($item->fecha_entrada)) }}}</td>
+					@if($item->fecha_finalizado)
+						<td>{{{ date( "d/m/Y",strtotime($item->fecha_finalizado)) }}}</td>
+					@else
+						<td></td>
+					@endif
                                         <td>
                                             <a href="{{ URL::route('orden.edit', $item->id) }}"><i class="glyphicon glyphicon-edit"></i></a>  
                                             {{ Form::open(array('style' => 'display: inline-block;', 'method' => 'DELETE', 'route' => array('orden.destroy', $item->id))) }}

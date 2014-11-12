@@ -16,6 +16,7 @@ Route::post('/login', array('as' => 'login', 'uses' => 'AuthController@login'));
 
 Route::group(array('before' => 'auth'), function()
 {
+    Route::get('/orden/getEquipoCliente/{id}','EquipoController@getEquipoCliente');
 	Route::get('/personas/{id}','PersonaController@index');
     // Esta será nuestra ruta de bienvenida.
     Route::get('/inicio', function()

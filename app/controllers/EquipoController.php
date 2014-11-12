@@ -19,6 +19,15 @@ class EquipoController extends BaseController {
 	 *
 	 * @return Response
 	 */
+	public function getEquipoCliente($id)
+	{
+		$cliente = Persona::find($id)->cliente->id;
+		
+		$equipos = Equipo::where('cliente_id','=',$cliente)->get()->toJson();
+		
+        return $equipos;
+	}
+
 	public function index()
 	{
 		$equipos = Equipo::with('tipoEquipo','cliente')->where('baja','=','0')->get();
@@ -36,7 +45,7 @@ class EquipoController extends BaseController {
                 $tipoEquipo = TipoEquipo::all()->lists('descripcion','id');
                 $clientes = Persona::has('cliente')->lists('ape_nom','id');
 
-		return View::make('equipos.create',compact('tipoEquipo','clientes'));
+				return View::make('equipos.create',compact('tipoEquipo','clientes'));
 	}
 
 	/**

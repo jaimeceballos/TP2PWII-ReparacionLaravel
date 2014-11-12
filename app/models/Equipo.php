@@ -21,4 +21,9 @@ class Equipo extends Eloquent {
         {
             return $this->belongsTo('TipoEquipo');
         }
+
+        public function orden()
+        {
+            return $this->belongsToMany('Orden','equipo_orden_trabajo');
+        }
 }
