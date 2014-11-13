@@ -49,7 +49,7 @@ class OrdenController extends BaseController {
                     'cliente_id'=>$cliente,
                     'tipo_orden_id'=>$input['tipo_orden_id'],
                     'descripcion_falla'=>$input['descripcion_falla'],
-                    'fecha_entrada'=>  date("d/m/Y"),
+                    'fecha_entrada'=>  date("Y-m-d H:i:s"),
                     'empleado_id' => $empleado
                 );
                 $equipos = $input['equipo'];
@@ -90,7 +90,10 @@ class OrdenController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('orden.edit');
+		$orden = Orden::find($id);
+		$clientes = Persona::has('cliente')->lists('ape_nom','id');
+		$tipoOrden = TipoOrden::all()->lists('descripcion','id');
+        return View::make('orden.edit',compact('orden','tipoOrden','clientes'));
 	}
 
 	/**

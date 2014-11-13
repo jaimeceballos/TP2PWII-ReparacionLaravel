@@ -21,11 +21,11 @@ class Orden extends Eloquent{
         'empleado_id' => 'required|exists:empleado,id',
         'cliente_id'  => 'required|exists:cliente,id',
         'tipo_orden_id'=>'required|exists:tipo_orden,id',
-        'fecha_entrada'=>'required|date_format:d/m/Y',
+        'fecha_entrada'=>'required|date_format:Y-m-d H:i:s',
         'descripcion_falla'=>'required|min:10',
         'trabajo_realizado'=>'min:10',
-        'fecha_finalizado'=>'date_format:d/m/Y',
-        'fecha_salida'  =>'date_format:d/m/Y',
+        'fecha_finalizado'=>'date_format:Y-m-d H:i:s',
+        'fecha_salida'  =>'date_format:Y-m-d H:i:s',
         'importe_trabajo'=>'numeric',
         'numero_factura'=>'numeric',
         'remito_entrega'=>'numeric',
@@ -43,7 +43,7 @@ class Orden extends Eloquent{
 
     public function equipos()
     {
-        return $this->belongsToMany('Equipo','equipo_orden_trabajo','equipo_id','orden_trabajo_id');
+        return $this->belongsToMany('Equipo','equipo_orden_trabajo','orden_trabajo_id','equipo_id');
     }
     public function tipoOrden()
     {
