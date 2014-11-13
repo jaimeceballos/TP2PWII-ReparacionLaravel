@@ -23,11 +23,11 @@ class Orden extends Eloquent{
         'tipo_orden_id'=>'required|exists:tipo_orden,id',
         'fecha_entrada'=>'required|date_format:Y-m-d H:i:s',
         'descripcion_falla'=>'required|min:10',
-        'trabajo_realizado'=>'min:10',
+        'trabajo_realizado'=>'sometimes|required|min:10',
         'fecha_finalizado'=>'date_format:Y-m-d H:i:s',
         'fecha_salida'  =>'date_format:Y-m-d H:i:s',
-        'importe_trabajo'=>'numeric',
-        'numero_factura'=>'numeric',
+        'importe_trabajo'=>'sometimes|required|numeric',
+        'numero_factura'=>'sometimes|required|numeric',
         'remito_entrega'=>'numeric',
     );
 
@@ -49,4 +49,11 @@ class Orden extends Eloquent{
     {
         return $this->belongsTo('TipoOrden');
     }
+
+    /*public function valida($input){
+
+        $v = Validator::make($input, self::$rules);
+
+        $v->sometimes
+    }*/
 }

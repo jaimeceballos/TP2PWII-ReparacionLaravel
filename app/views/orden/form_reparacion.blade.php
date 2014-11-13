@@ -1,3 +1,4 @@
+{{ Form::model($orden, array('class' => 'form-horizontal', 'method' => 'PATCH', 'route' => array('orden.update', $orden->id))) }}
 <div class="form-group">
 	<label>Trabajo Realizado</label><br>
 	{{ Form::textarea('trabajo_realizado', null, array('class'=>'form-control', 'placeholder'=>'Describa el trabajo realizado')) }}
@@ -17,3 +18,4 @@
 	<label>Numero de Remito de entrega</label><br>
 	{{ Form::text('remito_entrega', null, array('class'=>'form-control')) }}
 </div>
+{{ Form::close() }}

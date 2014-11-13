@@ -46,4 +46,13 @@ $(document).ready(function(){
    });
 });
 
+function validaRemito(){
+  if($('#remito').val()==''){
+    alert('Debe Ingresar el numero de Remito de entrega.');
+    return false;
+  }
+  $('#remito2').val($('#remito').val());
+  alert($('#remito2').val());
+  return true;
+}
 

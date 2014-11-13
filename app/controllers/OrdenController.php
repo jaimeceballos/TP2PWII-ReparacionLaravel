@@ -104,7 +104,40 @@ class OrdenController extends BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$this->orden = Orden::with('tipoOrden')->find($id);
+
+		if($this->orden->tipoOrden->descripcion == 'presupuesto' && !$this->orden->presupuestado){
+			
+			$input = Input::all();
+
+			$clearInput = array(
+                    'cliente_id'=>$this->orden->cliente_id,
+                    'tipo_orden_id'=>$this->orden->tipo_orden_id,
+                    'descripcion_falla'=>$this->orden->descripcion_falla,
+                    'fecha_entrada'=>  $this->orden->fecha_entrada,
+                    'empleado_id' => $this->orden->empleado_id,
+                    'trabajo_realizado' => $input['trabajo_realizado'],
+                    'remito_entrega'=> $input['remito_entrega'],
+                    'presupuestado' => true,
+                    'fecha_finalizado'=>date("Y-m-d H:i:s")
+                );
+
+			$validation= Validator::make($clearInput,Orden::$rules);
+			if($validation->passes()){
+				$this->orden->update($clearInput);
+				return Redirect::route('orden.index',$id)
+							->with('message', 'Presupuesto Generado.');				
+			}
+
+			return Redirect::route('orden.edit',$id)
+							->withInput()
+							->withErrors($validation)
+							->with('message', 'No se pudo modificar.');
+
+
+		}else{
+			echo 'no vino';
+		}
 	}
 
 	/**
@@ -118,4 +151,32 @@ class OrdenController extends BaseController {
 		//
 	}
 
+	public function entrega($id){
+		$this->orden = Orden::with('tipoOrden')->find($id);
+		$input = Input::all();
+
+		$clearInput = array(
+	            'cliente_id'=>$this->orden->cliente_id,
+	            'tipo_orden_id'=>$this->orden->tipo_orden_id,
+	            'descripcion_falla'=>$this->orden->descripcion_falla,
+	            'fecha_entrada'=>  $this->orden->fecha_entrada,
+	            'empleado_id' => $this->orden->empleado_id,
+	            'trabajo_realizado' => $this->orden->trabajo_realizado,
+	            'remito_entrega'=> $input['remito2'],
+	            'presupuestado' => $this->orden->presupuestado,
+	            'fecha_finalizado'=>$this->orden->fecha_finalizado,
+	            'fecha_salida'=> date("Y-m-d H:i:s")
+	        );
+		$validation= Validator::make($clearInput,Orden::$rules);
+		if($validation->passes()){
+			$this->orden->update($clearInput);
+			return Redirect::route('orden.index',$id)
+						->with('message', 'Entrega registrada.');				
+		}
+
+		return Redirect::route('orden.edit',$id)
+						->withInput()
+						->withErrors($validation)
+						->with('message', 'No se pudo registrar la entrega, por favor intente otra vez.');
+	}
 }

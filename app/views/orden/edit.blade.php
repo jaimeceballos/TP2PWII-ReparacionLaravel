@@ -16,7 +16,7 @@
     </div>
 </div>
 
-{{ Form::model($orden, array('class' => 'form-horizontal', 'method' => 'PATCH', 'route' => array('orden.update', $orden->id))) }}
+
     <div class="col-md-4 column">       
        <div class="panel panel-primary">
             <div class="panel-heading">
@@ -36,7 +36,9 @@
             </div>
        </div>
         <a href="{{ URL::route('orden.index') }}" class="btn btn-link">Cancelar</a>
+        @if($orden->tipoOrden->descripcion == 'reparacion')
         {{ Form::submit('Guardar', array('class' => 'btn btn-sm btn-success pull-right')) }}
+        @endif
     </div>
     <div class="col-md-8 column">
         <div class="jumbotron">
@@ -47,6 +49,6 @@
             @endif
         </div>
     </div>
-{{ Form::close() }}
+
 
 @stop

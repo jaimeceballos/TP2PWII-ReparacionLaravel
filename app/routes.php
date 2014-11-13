@@ -28,5 +28,6 @@ Route::group(array('before' => 'auth'), function()
     Route::resource('cliente', 'ClienteController');
     Route::resource('equipos', 'EquipoController');
     Route::resource('orden','OrdenController');
+    Route::patch('/orden/entrega/{id}',['as'=>'entrega','uses'=>'OrdenController@entrega']);
 });
 
