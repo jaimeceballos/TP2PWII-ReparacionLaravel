@@ -43,7 +43,7 @@ class Orden extends Eloquent{
 
     public function equipos()
     {
-        return $this->belongsToMany('Equipo','equipo_orden_trabajo');
+        return $this->belongsToMany('Equipo','equipo_orden_trabajo','equipo_id','orden_trabajo_id');
     }
     public function tipoOrden()
     {

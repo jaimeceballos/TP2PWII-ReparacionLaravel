@@ -15,4 +15,9 @@ class Empleado extends Eloquent{
     {
         return $this->hasMany('Orden');
     }
+    
+    public function usuario()
+    {
+        return $this->morphMany('User','entidadUsuario');
+    }
 }

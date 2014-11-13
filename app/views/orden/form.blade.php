@@ -10,7 +10,7 @@
         </div>
         <div class="form-group">
             <label>Equipo</label>
-              {{ Form::select('equipo',[null=>'Seleccione un Cliente'],null,['class'=>'form-control','required'=>'required','disabled'=>'disabled','multiple','id'=>'equipo']) }} 
+              {{ Form::select('equipo[]',[null=>'Seleccione un Cliente'],[null,null],['class'=>'form-control','required'=>'required','disabled'=>'disabled','multiple','id'=>'equipo']) }} 
 
         </div>
 

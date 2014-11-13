@@ -20,4 +20,9 @@ class Cliente extends Eloquent{
     {
     	return $this->hasMany('equipo');
     }
+    
+    public function usuario()
+    {
+        return $this->morphMany('User','entidadUsuario');
+    }
 }
