@@ -91,7 +91,7 @@
 				</ol>
 				<div class="carousel-inner">
 					<div class="item">
-						<img alt="" src="http://lorempixel.com/1600/500/sports/1" />
+						<img alt="" src="{{asset('static/img/1.jpg')}}" />
 						<div class="carousel-caption">
 							<h4>
 								First Thumbnail label
