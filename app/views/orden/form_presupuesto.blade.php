@@ -13,11 +13,13 @@
 	{{ Form::close() }}
 @else
 	
-	<button type = "submit" class="btn btn-sm btn-danger pull-right">Generar Orden de trabajo</button>
+	<a href="{{ URL::route('generar',$orden->id) }}" class="btn btn-sm btn-danger pull-right">Generar Orden de trabajo</a>
+	
+	<!--button type = "submit" class="btn btn-sm btn-danger pull-right">Generar Orden de trabajo</button-->
 	{{ Form::close() }}
 	{{ Form::open(array('style' => 'display: inline-block;', 'method' => 'PATCH', 'route' => array('entrega', $orden->id))) }}
 		{{ Form::hidden('remito2', null, array('id'=>'remito2')) }}
 		
-		<button type = "submit" class="btn btn-sm btn-primary" id="entrega" onclick="return validaRemito();">Entregar Equipo</button>
+		<button type = "submit" class="btn btn-sm btn-primary" id="entrega" onclick="return validaRemito();">Registrar entrega</button>
 	{{ Form::close() }}
 @endif

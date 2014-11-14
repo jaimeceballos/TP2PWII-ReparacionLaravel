@@ -29,5 +29,6 @@ Route::group(array('before' => 'auth'), function()
     Route::resource('equipos', 'EquipoController');
     Route::resource('orden','OrdenController');
     Route::patch('/orden/entrega/{id}',['as'=>'entrega','uses'=>'OrdenController@entrega']);
+    Route::get('/orden/generar/{id}',['as'=>'generar','uses'=>'OrdenController@generar']);
 });
 

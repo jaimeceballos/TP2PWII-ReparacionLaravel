@@ -29,6 +29,7 @@ class Orden extends Eloquent{
         'importe_trabajo'=>'sometimes|required|numeric',
         'numero_factura'=>'sometimes|required|numeric',
         'remito_entrega'=>'numeric',
+        'presupuesto'=>'sometimes|required|exists:orden_trabajo,id'
     );
 
     public function empleado()

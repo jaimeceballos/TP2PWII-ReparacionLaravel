@@ -37,7 +37,7 @@
        </div>
         <a href="{{ URL::route('orden.index') }}" class="btn btn-link">Cancelar</a>
         @if($orden->tipoOrden->descripcion == 'reparacion')
-        {{ Form::submit('Guardar', array('class' => 'btn btn-sm btn-success pull-right')) }}
+        
         @endif
     </div>
     <div class="col-md-8 column">

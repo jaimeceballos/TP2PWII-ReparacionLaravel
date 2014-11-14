@@ -15,9 +15,11 @@ class OrdenController extends BaseController {
 	}
 	public function index()
 	{
-            $ordenes = Orden::with('cliente','tipoOrden')->get();
+            $ordenes = Orden::with('cliente','tipoOrden')->where('fecha_salida','=',null)->orderBy('fecha_entrada','desc')->get();
             
-            return View::make('orden.index',compact('ordenes'));
+            $dia = date('d/m/Y');
+            
+            return View::make('orden.index',compact('ordenes','dia'));
 	}
 
 	/**
@@ -135,8 +137,32 @@ class OrdenController extends BaseController {
 							->with('message', 'No se pudo modificar.');
 
 
-		}else{
-			echo 'no vino';
+		}elseif($this->orden->tipoOrden->descripcion == 'reparacion'){
+			$input = Input::all();
+
+			$clearInput = array(
+                    'cliente_id'=>$this->orden->cliente_id,
+                    'tipo_orden_id'=>$this->orden->tipo_orden_id,
+                    'descripcion_falla'=>$this->orden->descripcion_falla,
+                    'fecha_entrada'=>  $this->orden->fecha_entrada,
+                    'empleado_id' => $this->orden->empleado_id,
+                    'trabajo_realizado' => $input['trabajo_realizado'],
+                    'remito_entrega'=> $input['remito_entrega'],
+                    'fecha_finalizado'=>date("Y-m-d H:i:s"),
+                    'importe_trabajo'=>$input['importe_trabajo'],
+                    'nro_factura'=>$input['nro_factura']
+                );
+			$validation= Validator::make($clearInput,Orden::$rules);
+			if($validation->passes()){
+				$this->orden->update($clearInput);
+				return Redirect::route('orden.index',$id)
+							->with('message', 'Presupuesto Generado.');				
+			}
+
+			return Redirect::route('orden.edit',$id)
+							->withInput()
+							->withErrors($validation)
+							->with('message', 'No se pudo modificar.');
 		}
 	}
 
@@ -178,5 +204,37 @@ class OrdenController extends BaseController {
 						->withInput()
 						->withErrors($validation)
 						->with('message', 'No se pudo registrar la entrega, por favor intente otra vez.');
+	}
+	public function generar($id){
+		$this->orden = Orden::find($id);
+		
+		$fecha = date("Y-m-d H:i:s");
+		$clearInput = array(
+	            'cliente_id'=>$this->orden->cliente_id,
+	            'tipo_orden_id'=> TipoOrden::where('descripcion','=','reparacion')->get()->first()->id,
+	            'descripcion_falla'=>$this->orden->descripcion_falla,
+	            'fecha_entrada'=>  $fecha,
+	            'empleado_id' => $this->orden->empleado_id,
+	            'presupuesto'=>$this->orden->id
+	            
+	        );
+		$equipos = $this->orden->equipos();
+		$validation= Validator::make($clearInput,Orden::$rules);
+		if($validation->passes()){
+			$orden = $this->orden->firstOrCreate($clearInput);
+			foreach($equipos as $item){
+                $orden->equipos()->attach($item->id);
+            }
+            Orden::find($id)->update(array(
+            		'fecha_salida'=>$fecha
+            	));
+			return Redirect::route('orden.index',$id)
+						->with('message', 'Orden Generada con exito.');				
+		}
+
+		return Redirect::route('orden.edit',$id)
+						->withInput()
+						->withErrors($validation)
+						->with('message', 'No se pudo registrar la Orden, por favor intente otra vez.');
 	}
 }
