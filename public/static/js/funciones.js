@@ -52,7 +52,7 @@ function validaRemito(){
     return false;
   }
   $('#remito2').val($('#remito').val());
-  alert($('#remito2').val());
+  
   return true;
 }
 

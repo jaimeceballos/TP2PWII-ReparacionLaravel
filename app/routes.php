@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', ['as'=>'home','uses'=>'AuthController@index']);
+Route::get('/login', ['as'=>'home','uses'=>'AuthController@index']);
 Route::post('/login', array('as' => 'login', 'uses' => 'AuthController@login'));
-
+Route::get('/',['as'=>'inicio','uses'=>'HomeController@showWelcome']);
 Route::group(array('before' => 'auth'), function()
 {
     Route::get('/orden/getEquipoCliente/{id}','EquipoController@getEquipoCliente');
