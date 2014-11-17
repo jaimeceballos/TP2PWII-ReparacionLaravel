@@ -55,4 +55,7 @@ function validaRemito(){
   
   return true;
 }
-
+function getByDni(){
+  $('#results').fadeIn();
+  window.location.href = "#results";
+}

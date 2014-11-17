@@ -13,3 +13,10 @@
 	background-color: #999;
 	height: 100px;	
 }
+.bg-seguimiento{
+	background-color: #87CEEB;
+}
+.results{
+	height: 500px;
+	display: none;
+}

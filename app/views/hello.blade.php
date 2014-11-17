@@ -23,7 +23,7 @@
 						<img alt="" src="{{asset('static/img/1.jpg')}}" />
 						<div class="carousel-caption">
 							<h4>
-								<a href="" class="btn btn-block btn-danger pull-right">Servicio de Calidad a su alcance</a>
+								<a class="btn btn-block btn-danger pull-right">Servicio de Calidad a su alcance</a>
 							</h4>
 							<p class="bg-primary">
 								Le ofrecemos un servicio de primera calidad, garantizamos nuestros trabajos<br>
@@ -35,7 +35,7 @@
 						<img alt="" src="{{asset('static/img/2.jpg')}}" />
 						<div class="carousel-caption">
 							<h4>
-								<a href="" class="btn btn-block btn-danger pull-right">Deteccion de errores de sistema y de hardware</a>
+								<a class="btn btn-block btn-danger pull-right">Deteccion de errores de sistema y de hardware</a>
 							</h4>
 							<p class="bg-primary">
 								Si esta cansado de la Pantallita azul del amigo Bill, somos su mejor opcion.<br>
@@ -48,7 +48,7 @@
 						<img alt="" src="{{asset('static/img/3.jpg')}}" />
 						<div class="carousel-caption">
 							<h4>
-								<a href="" class="btn btn-block btn-danger pull-right">Equipo Tecnico capacitado</a>
+								<a class="btn btn-block btn-danger pull-right">Equipo Tecnico capacitado</a>
 							</h4>
 							<p class="bg-primary">
 								Nuestro equipo se capacita constantemente para estar preparado para los rapidos cambios de la tecnologia<br>
@@ -69,7 +69,7 @@
 			      <div class="caption">
 			        <h3>Seguimiento on line</h3>
 			        <p>Consulte en linea el proceso de reparacion de su equipo.</p>
-			        <p><a href="#" class="btn btn-block btn-info" role="button">Consultar</a> </p>
+			        <p><a href="#seguimiento" class="btn btn-block btn-info" role="button">Consultar</a> </p>
 			      </div>
 			    </div>
 			  </div>
@@ -98,6 +98,45 @@
 			  </div>
 			</div>
 		</div>
+		</div>
+		<div class="section bg-seguimiento" id="seguimiento">
+		<div class="container">
+			<h1>Seguimiento de equipos en servicio tecnico</h1>
+			<!-- Nav tabs -->
+			<div class="row">
+				<div class="col-xs-12 col-md-12">
+				<ul class="nav nav-tabs" id="tabs_ofertas" role="tablist">
+				    <li class="active"><a href="#tab_pordni" role="tab" data-toggle="tab"><i class="fa fa-graduation-cap"></i> Busqueda por Nro. de documento</a></li>
+				  <li><a href="#tab_carreras" role="tab" data-toggle="tab"><i class="fa fa-university"></i> Busqueda por Nro. de orden</a></li>
+				</ul>
+				</div>
+				</div>
+				<!-- Tab panes -->
+				<div class="tab-content">
+				    <div class="tab-pane active" id="tab_pordni">
+				        @include('publico.pordni')
+				    </div>
+				    <div class="tab-pane" id="tab_carreras">
+				       
+				    </div>
+				</div>
+				</div>
+
+				<script>
+				    $(function(){
+				        $('#tabs_ofertas a').click(function (e) {
+				            e.preventDefault();
+				            $(this).tab('show');
+				        });
+				    });
+				</script>
+						
+
+
+		</div>
+		<div class="results bg-primary" id="results" name="results">
+			
+
 		</div>
 		<div class="footer">
 		</div>
