@@ -44,9 +44,9 @@ class OrdenController extends BaseController {
 	{
                 
                 $empleado= Auth::user()->entidad_usuario_id;
-		$input = Input::all();
+				$input = Input::all();
                 $cliente = $input['cliente_id'];
-		$cliente = Persona::find($cliente)->cliente->id;
+				$cliente = Persona::find($cliente)->cliente->id;
                 $clearInput = array(
                     'cliente_id'=>$cliente,
                     'tipo_orden_id'=>$input['tipo_orden_id'],
@@ -59,13 +59,28 @@ class OrdenController extends BaseController {
                 $validation = Validator::make($clearInput, Orden::$rules);
                 if($validation->passes())
                 {
-                    $orden = $this->orden->firstOrCreate($clearInput);
-                    foreach($equipos as $item){
-                        $orden->equipos()->attach($item);
-                    }
-                    $ordenes = Orden::with('cliente','tipoOrden')->get();
-                    return View::make('orden.index',compact('ordenes'))
-                                ->with('message', 'Orden Generada con exito');
+	                $orden = $this->orden->firstOrCreate($clearInput);
+	                foreach($equipos as $item){
+	                    $orden->equipos()->attach($item);
+                	}
+                	$tipoOrden = TipoOrden::find($clearInput['tipo_orden_id']);
+                	$logInput = array(
+                			'orden_trabajo_id' => $orden->id,
+                			'usuario_id'	=> Auth::user()->id,
+                			'movimiento' => $tipoOrden->descripcion == 'presupuesto' ? 'Ingreso para presupuesto' : 'Ingreso para reparacion'
+                		);
+                	$logValidation = Validator::make($logInput,MovimientosOrden::$rules);
+                	if($logValidation->passes())
+                	{
+                		MovimientosOrden::create($logInput);
+                	}
+
+                		
+                	
+                	$ordenes = Orden::with('cliente','tipoOrden')->get();
+                	$dia = date('d/m/Y');
+                	return View::make('orden.index',compact('ordenes','dia'))
+                            ->with('message', 'Orden Generada con exito');
                 }
                 return Redirect::route('orden.create')
 			->withInput()
@@ -127,6 +142,20 @@ class OrdenController extends BaseController {
 			$validation= Validator::make($clearInput,Orden::$rules);
 			if($validation->passes()){
 				$this->orden->update($clearInput);
+
+				$logInput = array(
+        			'orden_trabajo_id' => $id,
+        			'usuario_id'	=> Auth::user()->id,
+        			'movimiento' => 'Presupuestado. Trabajo Sugerido: '.$input['trabajo_realizado']
+        		);
+            	$logValidation = Validator::make($logInput,MovimientosOrden::$rules);
+            	if($logValidation->passes())
+            	{
+            		MovimientosOrden::create($logInput);
+            	}
+
+            	$dia = date('d/m/Y');
+
 				return Redirect::route('orden.index',$id)
 							->with('message', 'Presupuesto Generado.');				
 			}
@@ -155,6 +184,17 @@ class OrdenController extends BaseController {
 			$validation= Validator::make($clearInput,Orden::$rules);
 			if($validation->passes()){
 				$this->orden->update($clearInput);
+				$logInput = array(
+        			'orden_trabajo_id' => $id,
+        			'usuario_id'	=> Auth::user()->id,
+        			'movimiento' => 'Trabajo Finalizado: '.$input['trabajo_realizado'].' Costo $'.$input['importe_trabajo']
+        		);
+            	$logValidation = Validator::make($logInput,MovimientosOrden::$rules);
+            	if($logValidation->passes())
+            	{
+            		MovimientosOrden::create($logInput);
+            	}
+
 				return Redirect::route('orden.index',$id)
 							->with('message', 'Presupuesto Generado.');				
 			}
@@ -196,6 +236,18 @@ class OrdenController extends BaseController {
 		$validation= Validator::make($clearInput,Orden::$rules);
 		if($validation->passes()){
 			$this->orden->update($clearInput);
+
+			$logInput = array(
+    			'orden_trabajo_id' => $id,
+    			'usuario_id'	=> Auth::user()->id,
+    			'movimiento' => 'Equipo Entregado Remito Nro.: '.$clearInput['remito_entrega'].' Fecha: '.$clearInput['fecha_salida']
+    		);
+        	$logValidation = Validator::make($logInput,MovimientosOrden::$rules);
+        	if($logValidation->passes())
+        	{
+        		MovimientosOrden::create($logInput);
+        	}
+
 			return Redirect::route('orden.index',$id)
 						->with('message', 'Entrega registrada.');				
 		}
@@ -228,6 +280,28 @@ class OrdenController extends BaseController {
             Orden::find($id)->update(array(
             		'fecha_salida'=>$fecha
             	));
+            $logInput = array(
+    			'orden_trabajo_id' => $id,
+    			'usuario_id'	=> Auth::user()->id,
+    			'movimiento' => 'Presupuesto Aceptado su numero de orden de reparacion es: '.$orden->id
+    		);
+        	$logValidation = Validator::make($logInput,MovimientosOrden::$rules);
+        	if($logValidation->passes())
+        	{
+        		MovimientosOrden::create($logInput);
+        	}
+
+        	$logInput2 = array(
+        			'orden_trabajo_id' => $orden->id,
+        			'usuario_id'	=> Auth::user()->id,
+        			'movimiento' => 'Ingreso para reparacion'
+        		);
+        	$logValidation = Validator::make($logInput2,MovimientosOrden::$rules);
+        	if($logValidation->passes())
+        	{
+        		MovimientosOrden::create($logInput2);
+        	}
+
 			return Redirect::route('orden.index',$id)
 						->with('message', 'Orden Generada con exito.');				
 		}

@@ -6,7 +6,7 @@
 					<h4 class="ftr-h4">Mapa del Sitio</h4>
 				</th>
 				<th>
-					<h4 class="ftr-h4">C&oacute;ntacto</h4>
+					<h4 class="ftr-h4">Cont&aacute;cto</h4>
 				</th>
 				<th>
 					<h4 class="ftr-h4">Segu&iacute;nos</h4>

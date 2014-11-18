@@ -5,10 +5,10 @@
 		<form role="form">
 			<div class="form-group">
 				 <label for="dni">Ingrese el numero de su orden de trabajo</label>
-				 {{ Form::text('orden', null, array('class'=>'form-control', 'required'=>'required')) }}
+				 {{ Form::text('orden', null, array('class'=>'form-control', 'required'=>'required','id'=>'orden')) }}
 			</div>
 			
-			<button type="submit" class="btn btn-xs btn-primary pull-right"><i class="glyphicon glyphicon-search"></i> Ejecutar Consulta</button>
+			<a href="javascript:porOrden();" class="btn btn-xs btn-primary pull-right"><i class="glyphicon glyphicon-search"></i> Ejecutar Consulta</a>
 	{{ Form::close() }}
 	</div>
 </div>

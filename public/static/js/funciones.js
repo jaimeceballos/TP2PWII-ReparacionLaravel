@@ -60,3 +60,21 @@ function seguimiento(){
   $('#seguimiento').fadeIn();
   window.location.href = "#seguimiento";
 }
+
+function porOrden(){
+  $("#resultados tr").each(function(){
+    $(this).remove();
+  });
+  tabla = $("#resultados");
+
+  $.get("/seguimiento/"+$("#orden").val(),function(data){
+      if(data.length>0){
+        for(var i=0;i<data.length;i++){
+          tabla.append("<tr><td>"+data[i].orden_trabajo_id+"</td><td>"+data[i].movimiento+"</td><td>"+data[i].created_at+"</td></tr>");   
+        }
+      }else{
+        tabla.append("<tr><td colspan='3'>No existen datos de la orden solicitada</td></tr>"); 
+      }
+  },"json");
+
+}

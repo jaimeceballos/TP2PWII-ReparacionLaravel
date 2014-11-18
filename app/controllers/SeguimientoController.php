@@ -3,10 +3,10 @@
 class SeguimientoController extends BaseController{
 
 
-	public function porDni(){
-		$input = Input::all();
-		$nroOrden = $input['orden'];
-		$orden = Orden::find($nroOrden);
-		return Redirect::route('resultados');
+	public function porOrden($orden){
+		
+		$movimientos = MovimientosOrden::where('orden_trabajo_id','=',$orden)->get()->toJson();
+		
+		return $movimientos;
 	}
 }

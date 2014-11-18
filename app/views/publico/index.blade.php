@@ -40,11 +40,33 @@
 				        });
 				    });
 				</script>
-						
+				<br>
 
-
+				<div class="container well">
+				<hr>
+				<div class="">
+				<table class="table table-bordered table-hover table-condensed" >
+				<thead>
+					<tr>
+						<th>
+							Orden
+						</th>
+						<th>
+							Estado
+						</th>
+						<th>
+							Fecha Ultimo Movimiento
+						</th>
+					</tr>
+				</thead>
+				<tbody id="resultados">
+					
+				</tbody>
+			</table>
+			</div>
+			</div>		
 		</div>
-		<div class="results bg-primary" id="results" name="results">
+		<div class="section" id="registro" name="registro" style="display:none">
 			
 
 		</div>
