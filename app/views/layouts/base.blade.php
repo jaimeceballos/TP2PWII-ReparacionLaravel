@@ -7,7 +7,7 @@
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	 @include('layouts.assets')
 </head>
-<body class="body">
+<body class="navs">
 	<div class="container">
 	<div class="row clearfix">
             
@@ -69,7 +69,7 @@
 	</div>
 
 </div>
-<div class="cuerpo">
+<div class="body">
        
 	@yield('main')
 </div>

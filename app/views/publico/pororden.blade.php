@@ -4,8 +4,8 @@
 	{{ Form::open(array('route' => 'seguimiento', 'class' => 'form-horizontal')) }}
 		<form role="form">
 			<div class="form-group">
-				 <label for="dni">Ingrese su numero de documento</label>
-				 {{ Form::text('dni', null, array('class'=>'form-control', 'required'=>'required')) }}
+				 <label for="dni">Ingrese el numero de su orden de trabajo</label>
+				 {{ Form::text('orden', null, array('class'=>'form-control', 'required'=>'required')) }}
 			</div>
 			
 			<button type="submit" class="btn btn-xs btn-primary pull-right"><i class="glyphicon glyphicon-search"></i> Ejecutar Consulta</button>

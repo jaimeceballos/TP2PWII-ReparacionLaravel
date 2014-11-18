@@ -44,6 +44,7 @@ $(document).ready(function(){
    $("#equipo").change(function(){
        $("#guardar").removeAttr("disabled");
    });
+   
 });
 
 function validaRemito(){
@@ -55,7 +56,7 @@ function validaRemito(){
   
   return true;
 }
-function getByDni(){
-  $('#results').fadeIn();
-  window.location.href = "#results";
+function seguimiento(){
+  $('#seguimiento').fadeIn();
+  window.location.href = "#seguimiento";
 }
