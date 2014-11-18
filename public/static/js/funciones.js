@@ -57,6 +57,7 @@ function validaRemito(){
   return true;
 }
 function seguimiento(){
+  $('#orden').val('');
   $('#seguimiento').fadeIn();
   window.location.href = "#seguimiento";
 }

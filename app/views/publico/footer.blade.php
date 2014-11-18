@@ -29,7 +29,7 @@
 			<td>
 				<a href=""><img src="{{ asset('static/img/footer_fb_button.png') }}"></a>
 				<a href=""><img src="{{ asset('static/img/twitter-footer.png') }}"></a>
-				<a href=""><img src="{{ asset('static/img/google.png') }}" height="60" width="60"></a>
+				<a href="https://plus.google.com/+jaimeceballos82/" target="_new"><img src="{{ asset('static/img/google.png') }}" height="60" width="60"></a>
 			</td>
 		</tbody>
 	</table>

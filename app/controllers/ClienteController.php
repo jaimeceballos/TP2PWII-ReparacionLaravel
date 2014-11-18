@@ -17,6 +17,10 @@ class ClienteController extends BaseController {
 		return View::make('cliente.index',compact('clientes')); 
 	}
 
+	public function registro()
+	{
+		return View::make('registro.index');
+	}
 
 	/**
 	 * Show the form for creating a new resource.

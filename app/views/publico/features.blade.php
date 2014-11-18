@@ -19,7 +19,7 @@
 			      <div class="caption">
 			        <h3>Solicitud de servicio On line</h3>
 			        <p>Registrese en nuestro sitio para solicitar servicio para su equipo desde su casa.</p>
-			        <p><a href="#" class="btn btn-block btn-info" role="button">Registrarse</a> </p>
+			        <p><a href="{{ URL::route('registro') }}" class="btn btn-block btn-info" role="button">Registrarse</a> </p>
 			      </div>
 			    </div>
 			  </div>
