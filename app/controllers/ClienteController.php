@@ -14,12 +14,14 @@ class ClienteController extends BaseController {
 		
 		}
 		$clientes = Cliente::with('persona')->where('activo','=','1')->get();
+
 		return View::make('cliente.index',compact('clientes')); 
 	}
 
 	public function registro()
 	{
-		return View::make('registro.index');
+		$conf=false;
+		return View::make('registro.index',compact('conf'));
 	}
 	public function registroStore()
 	{
@@ -54,8 +56,8 @@ class ClienteController extends BaseController {
 	        		'entidad_usuario_id' => $cliente->id	
 	        	);
 	        	User::create($userInput);
-	        	return Redirect::route('registro')
-							->with('conf','ok');
+	        	return Redirect::route('registro',['conf'=>'ok']);
+							
 			}
 			return Redirect::route('registro')
 							->withInput()

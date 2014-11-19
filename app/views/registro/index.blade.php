@@ -16,7 +16,7 @@
 
 	<center><h1>Registro de usuario</h1></center>
 	<div class="container">
-			@if($conf)
+			@if(Input::get('conf'))
 			<div class="row">
 				<h4> Su registro se llevo a cabo con exito!!! </h4>
 				<p>Puede ingresar haciendo <a href="{{ URL::route('home') }}" class="btn btn-sm btn-success">click aqui</a> </p>
