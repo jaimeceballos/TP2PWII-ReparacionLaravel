@@ -21,7 +21,52 @@ class ClienteController extends BaseController {
 	{
 		return View::make('registro.index');
 	}
+	public function registroStore()
+	{
+		$input = Input::all();
+		$input['rol'] = 'cliente';
+		$validation = Persona::validar($input);
+		if($validation->passes())
+		{
+			$validationUser = Validator::make($input,User::$rules);
+			if($validationUser->passes())
+			{
+				$data = array(
+					'ape_nom'=>$input['ape_nom'],
+					'juridica'=>$input['juridica'],
+					'dni'=>$input['dni'],
+					'cuit'=>$input['cuit'],
+					'domicilio'=>$input['domicilio'],
+					'telefono'=>$input['telefono'],
+					'email'=>$input['email']					
+				);
+				$persona = Persona::firstOrCreate($data);
 
+				$cliente = Cliente::firstOrCreate(array(
+	        		'persona_id'=>$persona->id,
+	        		'activo'=>1,
+	        	));
+	        	$userInput = array(
+	        		'username' => $input['username'],
+	        		'password'	=> Hash::make($input['password']),
+	        		'rol'		=> $input['rol'],
+	        		'entidad_usuario_type'=>'Cliente',
+	        		'entidad_usuario_id' => $cliente->id	
+	        	);
+	        	User::create($userInput);
+	        	return Redirect::route('registro')
+							->with('conf','ok');
+			}
+			return Redirect::route('registro')
+							->withInput()
+							->withErrors($validationUser)
+							->with('message','Error Verifique los datos.');
+		}
+		return Redirect::route('registro')
+							->withInput()
+							->withErrors($validationUser)
+							->with('message','Error Verifique los datos.');
+	}
 	/**
 	 * Show the form for creating a new resource.
 	 *

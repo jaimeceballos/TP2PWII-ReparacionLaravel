@@ -25,9 +25,10 @@ class Persona extends Eloquent{
     		'domicilio'=>'min:10',
     		'telefono'=>'min:10',
     		'email'=>'email',
+            
     	);
     
-    public function validar($input)
+    public static function validar($input)
     {
         $v = Validator::make($input,Persona::$rules);
         

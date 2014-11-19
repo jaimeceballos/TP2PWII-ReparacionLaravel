@@ -26,3 +26,12 @@
 	height: 500px;
 	display: none;
 }
+.reg-text{
+	color:#428BCA;
+}
+.reg-field{
+	padding:5px 5px 5px 5px;
+	border:1px solid #999;
+	border-radius: 3px;
+	box-shadow: 3px 3px 3px #999;
+}
