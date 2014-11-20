@@ -1,5 +1,10 @@
 
 @extends('publico.base')
+<div>
+@section('navbar')
+    @include('publico.nav')
+@stop
+</div>
 @section('main')
 	
 		<div>

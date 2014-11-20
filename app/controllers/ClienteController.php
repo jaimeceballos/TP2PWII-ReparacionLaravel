@@ -66,7 +66,7 @@ class ClienteController extends BaseController {
 		}
 		return Redirect::route('registro')
 							->withInput()
-							->withErrors($validationUser)
+							->withErrors($validation)
 							->with('message','Error Verifique los datos.');
 	}
 	/**

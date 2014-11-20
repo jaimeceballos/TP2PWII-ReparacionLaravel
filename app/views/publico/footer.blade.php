@@ -15,6 +15,7 @@
 		</thead>
 		<tbody>
 			<td>
+                            <a href="{{ URL::route('home') }}" >Area de miembros</a>
 			</td>
 			<td>
 				<address class="ftr-address">

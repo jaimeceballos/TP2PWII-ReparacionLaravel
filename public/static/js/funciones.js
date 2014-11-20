@@ -1,4 +1,5 @@
 $(document).ready(function(){
+        
    $("#juridica").change(function () {
       if($("#juridica").val() == "0"){
           $('#cuit').removeAttr("required");
@@ -63,19 +64,24 @@ function seguimiento(){
 }
 
 function porOrden(){
+  
   $("#resultados tr").each(function(){
     $(this).remove();
   });
   tabla = $("#resultados");
-
-  $.get("/seguimiento/"+$("#orden").val(),function(data){
-      if(data.length>0){
-        for(var i=0;i<data.length;i++){
-          tabla.append("<tr><td>"+data[i].orden_trabajo_id+"</td><td>"+data[i].movimiento+"</td><td>"+data[i].created_at+"</td></tr>");   
+  if($("#orden").val()!==""){
+    $.get("/seguimiento/"+$("#orden").val(),function(data){
+        if(data.length>0){
+          for(var i=0;i<data.length;i++){
+            tabla.append("<tr><td>"+data[i].orden_trabajo_id+"</td><td>"+data[i].movimiento+"</td><td>"+data[i].created_at+"</td></tr>");   
+          }
+        }else{
+          tabla.append("<tr><td colspan='3'>No existen datos de la orden solicitada</td></tr>"); 
         }
-      }else{
-        tabla.append("<tr><td colspan='3'>No existen datos de la orden solicitada</td></tr>"); 
-      }
-  },"json");
-
+    },"json");
+  }else{
+      $("#divorden").append("<div class='alert alert-dismissable alert-danger'>"+
+                            "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>"+
+				"<h4>Debe indicar el numero de orden</h4></div>");
+  }
 }
