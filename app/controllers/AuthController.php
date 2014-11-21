@@ -36,7 +36,7 @@ class AuthController  extends BaseController{
         	return Redirect::to('/inicio');
         }
        
-        return Redirect::to('/')
+        return Redirect::to('/login')
         		->with('mensaje_error','Verifica tus datos')
         		->withInput();
         
