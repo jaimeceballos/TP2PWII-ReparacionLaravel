@@ -1,5 +1,13 @@
 $(document).ready(function(){
         
+  $('#ape_nom').change(function(){
+    if($('#ape_nom').length < 4 || $('#ape_nom').val()==""){
+      $('#nombrediv').append('<p id="errormsg">nombre invalido</p>');
+    }else{
+      $('#nombrediv').remove('errormsg');
+    }
+  });
+
    $("#juridica").change(function () {
       if($("#juridica").val() == "0"){
           $('#cuit').removeAttr("required");
@@ -83,5 +91,6 @@ function porOrden(){
       $("#divorden").append("<div class='alert alert-dismissable alert-danger'>"+
                             "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>"+
 				"<h4>Debe indicar el numero de orden</h4></div>");
+      $("#orden").focus();
   }
 }

@@ -25,7 +25,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'proyectoBD',
 			'username'  => 'root',
-			'password'  => 'udc',
+			'password'  => '123456',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

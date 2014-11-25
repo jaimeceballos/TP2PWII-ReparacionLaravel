@@ -25,12 +25,12 @@
 			@else
 			<div class="row">
 			
-			<div class="col-md-12 column">
+			<div class="col-md-6 column">
 				<div class="jumbotron reg-text">
-				{{Form::open(['route'=>'registro'])}} 
-					<div class="form-group">
+				{{Form::open(['route'=>'registro','id'=>'registro','onsubmit'=>'return validaRegistro()'])}} 
+					<div class="form-group" id="nombrediv">
 						<label>Apellido y nombre</label>
-						{{Form::text('ape_nom','',['class'=>'form-control','placeholder'=>'Apellido y nombre'])}}<br>
+						{{Form::text('ape_nom','',['class'=>'form-control','placeholder'=>'Apellido y nombre','id'=>'ape_nom'])}}<br>
 					</div>	
 					<div class="form-group">
 						<label>Persona juridica</label>
@@ -44,6 +44,10 @@
 						<label>Numero de cuit</label>
 						{{Form::number('cuit','',['placeholder'=>'cuit','class'=>'form-control','id'=>'cuit'])}}<br>
 					</div>
+				</div>
+			</div>
+			<div class="col-md-6 column">
+				<div class="jumbotron reg-text">
 					<div class="form-group">
 						<label>Domicilio</label>
 						{{Form::Text('domicilio','',['placeholder'=>'domicilio','class'=>'form-control'])}}<br>
@@ -56,24 +60,29 @@
 						<label>Email</label>
 						{{Form::email('email','',['placeholder'=>'usuario@ejemplo.com','class'=>'form-control'])}}<br>
 					</div>
-					<fieldset class="reg-field">
-					<div class="form-group">
-						<label>Usuario</label>
-						{{Form::text('username','',['class'=>'form-control'])}}<br>
-					</div>
+				</div>
+			</div>
+			<div class="col-md-12 column">
+				<div class="jumbotron reg-text">
+					
 					
 					<div class="row clearfix">
 						<div class="col-md-4 column">
+							<label>Usuario</label>
+							{{Form::text('username','',['class'=>'form-control'])}}<br>
+						</div>
+						<div class="col-md-4 column">
 							<label>Contrase&ntilde;a</label><br>
-									{{Form::password('password','',['class'=>'form-control'])}}<br>
+							{{Form::password('password',['class'=>'form-control'])}}<br>
+									
 						</div>
 						<div class="col-md-4 column">
 							<label>Reingrese la Contrase&ntilde;a</label><br>
-									{{Form::password('password_confirmation','',['class'=>'form-control'])}}<br>
+									{{Form::password('password_confirmation',['class'=>'form-control',])}}<br>
 						</div>
 						
 					</div>
-					</fieldset>
+					
 
 					<br>
 					<a href="{{ URL::route('inicio') }}" class="btn btn-link">Cancelar</a>
