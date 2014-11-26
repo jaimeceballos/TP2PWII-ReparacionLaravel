@@ -33,6 +33,28 @@ class ClienteController extends BaseController {
 			$validationUser = Validator::make($input,User::$rules);
 			if($validationUser->passes())
 			{
+				
+
+
+				
+				if($input['juridica'] === 1){
+					$data = array(
+						'ape_nom'=>$input['ape_nom'],
+						'juridica'=>$input['juridica'],
+						'cuit'=>$input['cuit']
+					);
+				}else{
+					$data = array(
+						'ape_nom'=>$input['ape_nom'],
+						'juridica'=>$input['juridica'],
+						'dni'=>$input['dni']
+					);
+				}
+				
+				
+
+				$persona = Persona::firstOrCreate($data);
+				
 				$data = array(
 					'ape_nom'=>$input['ape_nom'],
 					'juridica'=>$input['juridica'],
@@ -42,12 +64,14 @@ class ClienteController extends BaseController {
 					'telefono'=>$input['telefono'],
 					'email'=>$input['email']					
 				);
-				$persona = Persona::firstOrCreate($data);
+				
+				$persona->update($data);
 
 				$cliente = Cliente::firstOrCreate(array(
-	        		'persona_id'=>$persona->id,
-	        		'activo'=>1,
+	        		'persona_id'=>$persona->id
 	        	));
+
+
 	        	$userInput = array(
 	        		'username' => $input['username'],
 	        		'password'	=> Hash::make($input['password']),
@@ -55,7 +79,9 @@ class ClienteController extends BaseController {
 	        		'entidad_usuario_type'=>'Cliente',
 	        		'entidad_usuario_id' => $cliente->id	
 	        	);
+
 	        	User::create($userInput);
+	        	
 	        	return Redirect::route('registro',['conf'=>'ok']);
 							
 			}

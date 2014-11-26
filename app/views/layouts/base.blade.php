@@ -25,13 +25,13 @@
 							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Clientes<strong class="caret"></strong></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="">Listar</a>
+									<a href=""><i class="glyphicon glyphicon-hdd"></i> Mis equipos</a>
 								</li>
 								<li>
-									<a href="">Nuevo</a>
+									<a href=""><i class="glyphicon glyphicon-tasks"></i> Mis ordenes</a>
 								</li>
 								<li>
-									<a href="">Buscar</a>
+									<a href=""><i class="glyphicon glyphicon-send"></i> Solicitar Servicio</a>
 								</li>
 							</ul>
                             @else
@@ -55,6 +55,9 @@
 						<li class="dropdown">
 							 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> {{ Auth::user()->username }}<strong class="caret"></strong></a>
 							<ul class="dropdown-menu">
+								<li>
+									<a href="">Modificar Perfil</a>
+								</li>
 								<li>
 									<a href="{{ URL::route('logout') }}">Salir</a>
 								</li>

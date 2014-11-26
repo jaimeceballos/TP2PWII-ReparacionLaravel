@@ -1,12 +1,6 @@
 $(document).ready(function(){
         
-  $('#ape_nom').change(function(){
-    if($('#ape_nom').length < 4 || $('#ape_nom').val()==""){
-      $('#nombrediv').append('<p id="errormsg">nombre invalido</p>');
-    }else{
-      $('#nombrediv').remove('errormsg');
-    }
-  });
+  
 
    $("#juridica").change(function () {
       if($("#juridica").val() == "0"){
